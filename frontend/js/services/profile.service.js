@@ -1,8 +1,8 @@
 // Profile Service
 angular.module('jobSeekerApp')
-.factory('ProfileService', ['$http', function($http) {
+.factory('ProfileService', ['$http', 'ApiConfig', function($http, ApiConfig) {
   
-  const API_URL = 'http://localhost:5000/api/profile';
+  const API_URL = ApiConfig.PROFILE_API;
 
   return {
     // Get user profile

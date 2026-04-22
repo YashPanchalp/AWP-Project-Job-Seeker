@@ -1,8 +1,8 @@
 // Authentication Service
 angular.module('jobSeekerApp')
-.factory('AuthService', ['$http', '$window', function($http, $window) {
+.factory('AuthService', ['$http', '$window', 'ApiConfig', function($http, $window, ApiConfig) {
   
-  const API_URL = 'http://localhost:5000/api';
+  const API_URL = ApiConfig.AUTH_API;
 
   return {
     // Register user

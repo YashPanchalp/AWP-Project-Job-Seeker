@@ -1,8 +1,8 @@
 // Job Service
 angular.module('jobSeekerApp')
-.factory('JobService', ['$http', function($http) {
+.factory('JobService', ['$http', 'ApiConfig', function($http, ApiConfig) {
   
-  const API_URL = 'http://localhost:5000/api/jobs';
+  const API_URL = ApiConfig.JOBS_API;
 
   return {
     // Get all jobs with filters

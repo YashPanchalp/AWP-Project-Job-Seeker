@@ -1,8 +1,8 @@
 // Application Service
 angular.module('jobSeekerApp')
-.factory('ApplicationService', ['$http', function($http) {
+.factory('ApplicationService', ['$http', 'ApiConfig', function($http, ApiConfig) {
   
-  const API_URL = 'http://localhost:5000/api/applications';
+  const API_URL = ApiConfig.APPLICATIONS_API;
 
   return {
     // Apply for job
