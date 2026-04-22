@@ -1,0 +1,69 @@
+<!-- Apply Job View -->
+<div>
+    <h1>Apply for Job</h1>
+    <h2 style="color: #3498db; margin-bottom: 20px;">{{job.title}} at {{job.companyName}}</h2>
+
+    <div ng-show="message" class="alert" ng-class="{'alert-success': messageType === 'success', 'alert-error': messageType === 'error'}">
+        {{message}}
+    </div>
+
+    <div ng-show="loading" class="text-center">
+        <div class="spinner"></div>
+    </div>
+
+    <form ng-show="!loading" ng-submit="submit()" class="card">
+        <h3>Your Information (Auto-filled from Profile)</h3>
+        
+        <div class="form-group">
+            <label for="appName">Full Name *</label>
+            <input type="text" id="appName" name="name" ng-model="formData.name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="appEmail">Email *</label>
+            <input type="email" id="appEmail" name="email" ng-model="formData.email" required>
+        </div>
+
+        <div class="form-group">
+            <label for="appPhone">Phone</label>
+            <input type="tel" id="appPhone" name="phone" ng-model="formData.phone">
+        </div>
+
+        <div class="form-group">
+            <label for="appQualification">Qualification</label>
+            <input type="text" id="appQualification" name="qualification" ng-model="formData.qualification">
+        </div>
+
+        <div class="form-group">
+            <label>Skills</label>
+            <div>
+                <span class="badge badge-secondary" ng-repeat="skill in formData.skills" style="margin-right: 5px; margin-bottom: 5px; display: inline-block;">{{skill}}</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="appExperience">Experience</label>
+            <input type="text" id="appExperience" name="experience" ng-model="formData.experience">
+        </div>
+
+        <div class="form-group">
+            <label for="appLocation">Location</label>
+            <input type="text" id="appLocation" name="location" ng-model="formData.location">
+        </div>
+
+        <h3 style="margin-top: 30px; margin-bottom: 15px;">Additional Information</h3>
+
+        <div class="form-group">
+            <label for="coverLetter">Cover Letter</label>
+            <textarea id="coverLetter" name="coverLetter" ng-model="formData.coverLetter" placeholder="Tell us why you're interested in this role" rows="6"></textarea>
+        </div>
+
+        <div class="btn-group">
+            <button type="submit" class="btn btn-success" ng-disabled="submitting">
+                <span ng-show="!submitting">Submit Application</span>
+                <span ng-show="submitting">Submitting...</span>
+            </button>
+            <button type="button" ng-click="goBack()" class="btn btn-secondary">Cancel</button>
+        </div>
+    </form>
+</div>

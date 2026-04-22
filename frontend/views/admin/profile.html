@@ -1,0 +1,86 @@
+<!-- Admin Profile View -->
+<div>
+    <h1>Company Profile</h1>
+
+    <div ng-show="message" class="alert" ng-class="{'alert-success': messageType === 'success', 'alert-error': messageType === 'error'}">
+        {{message}}
+    </div>
+
+    <div ng-show="loading" class="text-center">
+        <div class="spinner"></div>
+    </div>
+
+    <div ng-show="!loading" class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h2>Your Company Information</h2>
+            <button ng-click="toggleEditMode()" class="btn" ng-class="{'btn-secondary': editMode, 'btn-primary': !editMode}">
+                {{editMode ? 'Cancel' : 'Edit'}}
+            </button>
+        </div>
+
+        <form ng-show="editMode" ng-submit="saveProfile()">
+            <div class="form-group">
+                <label for="adminName">Your Full Name *</label>
+                <input type="text" id="adminName" name="name" ng-model="profile.name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="adminEmail">Email (Read-only)</label>
+                <input type="email" id="adminEmail" name="email" ng-model="profile.email" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="adminPhone">Phone</label>
+                <input type="tel" id="adminPhone" name="phone" ng-model="profile.phone">
+            </div>
+
+            <h3 style="margin-top: 30px; margin-bottom: 15px;">Company Information</h3>
+
+            <div class="form-group">
+                <label for="companyName">Company Name *</label>
+                <input type="text" id="companyName" name="companyName" ng-model="profile.companyName" placeholder="e.g., Google Inc." required>
+            </div>
+
+            <div class="form-group">
+                <label for="companyLocation">Company Location *</label>
+                <input type="text" id="companyLocation" name="companyLocation" ng-model="profile.companyLocation" placeholder="e.g., Mountain View, California, USA" required>
+            </div>
+
+            <div class="form-group">
+                <label for="companyWebsite">Company Website</label>
+                <input type="url" id="companyWebsite" name="companyWebsite" ng-model="profile.companyWebsite" placeholder="e.g., https://www.google.com">
+            </div>
+
+            <div class="form-group">
+                <label for="companyDescription">Company Description</label>
+                <textarea id="companyDescription" name="companyDescription" ng-model="profile.companyDescription" placeholder="Tell us about your company..." rows="6"></textarea>
+            </div>
+
+            <div class="btn-group">
+                <button type="submit" class="btn btn-success" ng-disabled="saving">
+                    {{saving ? 'Saving...' : 'Save Profile'}}
+                </button>
+                <button type="button" ng-click="cancelEdit()" class="btn btn-secondary">Cancel</button>
+            </div>
+        </form>
+
+        <div ng-show="!editMode" style="padding: 20px 0;">
+            <h3>Personal Information</h3>
+            <p><strong>Name:</strong> {{profile.name}}</p>
+            <p><strong>Email:</strong> {{profile.email}}</p>
+            <p><strong>Phone:</strong> {{profile.phone || 'Not provided'}}</p>
+
+            <h3 style="margin-top: 30px; margin-bottom: 15px;">Company Information</h3>
+            <p><strong>Company Name:</strong> {{profile.companyName || 'Not provided'}}</p>
+            <p><strong>Location:</strong> {{profile.companyLocation || 'Not provided'}}</p>
+            <p><strong>Website:</strong> 
+                <span ng-if="profile.companyWebsite">
+                    <a href="{{profile.companyWebsite}}" target="_blank">{{profile.companyWebsite}}</a>
+                </span>
+                <span ng-if="!profile.companyWebsite">Not provided</span>
+            </p>
+            <p><strong>Description:</strong></p>
+            <p style="white-space: pre-wrap; line-height: 1.6;">{{profile.companyDescription || 'Not provided'}}</p>
+        </div>
+    </div>
+</div>

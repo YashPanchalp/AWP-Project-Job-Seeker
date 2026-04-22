@@ -1,0 +1,42 @@
+<!-- My Applications View -->
+<div>
+    <h1>My Applications</h1>
+
+    <div ng-show="message" class="alert" ng-class="{'alert-success': messageType === 'success', 'alert-error': messageType === 'error'}">
+        {{message}}
+    </div>
+
+    <div ng-show="loading" class="text-center">
+        <div class="spinner"></div>
+    </div>
+
+    <div ng-show="!loading && applications.length > 0">
+        <table>
+            <thead>
+                <tr>
+                    <th>Job Title</th>
+                    <th>Company</th>
+                    <th>Location</th>
+                    <th>Applied Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="app in applications">
+                    <td>{{app.jobId.title}}</td>
+                    <td>{{app.jobId.companyName}}</td>
+                    <td>{{app.jobId.location}}</td>
+                    <td>{{app.createdAt | date:'short'}}</td>
+                    <td>
+                        <span class="badge" ng-class="getStatusBadgeClass(app.status)">{{app.status}}</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div ng-show="!loading && applications.length === 0" class="text-center" style="padding: 40px;">
+        <p>You haven't applied to any jobs yet.</p>
+        <a href="#/jobs" class="btn btn-primary" style="margin-top: 20px;">Browse Jobs</a>
+    </div>
+</div>

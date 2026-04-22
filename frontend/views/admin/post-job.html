@@ -1,0 +1,68 @@
+<!-- Post Job View -->
+<div>
+    <h1>Post a New Job</h1>
+
+    <div ng-show="message" class="alert" ng-class="{'alert-success': messageType === 'success', 'alert-error': messageType === 'error'}">
+        {{message}}
+    </div>
+
+    <form ng-submit="submitJob()" class="card">
+        <h3>Job Details</h3>
+
+        <div class="form-group">
+            <label for="jobTitle">Job Title *</label>
+            <input type="text" id="jobTitle" name="title" ng-model="formData.title" placeholder="e.g., Senior Software Engineer" required>
+        </div>
+
+        <div class="form-group">
+            <label for="companyName">Company Name *</label>
+            <input type="text" id="companyName" name="companyName" ng-model="formData.companyName" placeholder="e.g., Google" required>
+        </div>
+
+        <div class="form-group">
+            <label for="jobLocation">Location *</label>
+            <input type="text" id="jobLocation" name="location" ng-model="formData.location" placeholder="e.g., New York, USA" required>
+        </div>
+
+        <div class="form-group">
+            <label for="jobSalary">Salary</label>
+            <input type="text" id="jobSalary" name="salary" ng-model="formData.salary" placeholder="e.g., $100,000 - $150,000">
+        </div>
+
+        <div class="form-group">
+            <label for="jobType">Job Type</label>
+            <select id="jobType" name="jobType" ng-model="formData.jobType">
+                <option value="Full-time">Full-time</option>
+                <option value="Part-time">Part-time</option>
+                <option value="Contract">Contract</option>
+                <option value="Internship">Internship</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="jobDescription">Job Description *</label>
+            <textarea id="jobDescription" name="description" ng-model="formData.description" placeholder="Describe the job responsibilities and requirements" rows="6" required></textarea>
+        </div>
+
+        <h3 style="margin-top: 30px; margin-bottom: 15px;">Required Skills *</h3>
+
+        <div style="margin-bottom: 15px;">
+            <span class="badge badge-secondary" ng-repeat="skill in formData.skillsRequired" style="margin-right: 5px; margin-bottom: 5px; display: inline-block;">
+                {{skill}}
+                <button type="button" ng-click="removeSkill($index)" style="background: none; border: none; color: white; cursor: pointer; margin-left: 5px;">×</button>
+            </span>
+        </div>
+
+        <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+            <input type="text" id="newSkill" name="newSkill" ng-model="newSkill" placeholder="Add a required skill">
+            <button type="button" ng-click="addSkill()" class="btn btn-secondary">Add Skill</button>
+        </div>
+
+        <div class="btn-group">
+            <button type="submit" class="btn btn-success" ng-disabled="loading">
+                {{loading ? 'Posting...' : 'Post Job'}}
+            </button>
+            <button type="button" ng-click="goBack()" class="btn btn-secondary">Cancel</button>
+        </div>
+    </form>
+</div>

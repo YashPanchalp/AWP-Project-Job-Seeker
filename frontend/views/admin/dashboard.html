@@ -1,0 +1,47 @@
+<!-- Admin Dashboard View -->
+<div>
+    <h1>Admin Dashboard</h1>
+    <p style="color: #666; margin-bottom: 20px;">Manage your job postings and view applicants</p>
+
+    <button ng-click="postNewJob()" class="btn btn-success" style="margin-bottom: 20px;">+ Post New Job</button>
+
+    <div ng-show="message" class="alert" ng-class="{'alert-success': messageType === 'success', 'alert-error': messageType === 'error'}">
+        {{message}}
+    </div>
+
+    <div ng-show="loading" class="text-center">
+        <div class="spinner"></div>
+    </div>
+
+    <div ng-show="!loading && jobs.length > 0" class="row">
+        <div class="card" ng-repeat="job in jobs">
+            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px;">
+                <h3 class="card-title">{{job.title}}</h3>
+                <span class="badge" ng-class="job.isActive ? 'badge-success' : 'badge-danger'">
+                    {{job.isActive ? 'Active' : 'Inactive'}}
+                </span>
+            </div>
+            
+            <p><strong>Company:</strong> {{job.companyName}}</p>
+            <p><strong>Location:</strong> {{job.location}}</p>
+            <p><strong>Posted:</strong> {{job.createdAt | date:'short'}}</p>
+            
+            <div style="background-color: #f8f9fa; padding: 10px; border-radius: 4px; margin: 10px 0;">
+                <strong style="color: #2c3e50; font-size: 16px;">
+                    Applicants: <span style="color: #3498db;">{{job.applicantsCount}}</span>
+                </strong>
+            </div>
+
+            <div class="btn-group">
+                <button ng-click="viewApplicants(job._id)" class="btn btn-primary">View Applicants</button>
+                <button ng-click="editJob(job._id)" class="btn btn-secondary">Edit</button>
+                <button ng-click="deleteJob(job._id)" class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <div ng-show="!loading && jobs.length === 0" class="text-center" style="padding: 40px;">
+        <p>You haven't posted any jobs yet.</p>
+        <button ng-click="postNewJob()" class="btn btn-success" style="margin-top: 20px;">Post Your First Job</button>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+<!-- Applicants List View -->
+<div>
+    <button ng-click="goBack()" class="btn btn-secondary" style="margin-bottom: 20px;">← Back to Dashboard</button>
+
+    <h1>Applicants for {{job.title}}</h1>
+    <p style="color: #666; margin-bottom: 20px;">{{job.companyName}} - {{job.location}}</p>
+
+    <div ng-show="message" class="alert" ng-class="{'alert-success': messageType === 'success', 'alert-error': messageType === 'error'}">
+        {{message}}
+    </div>
+
+    <div ng-show="loading" class="text-center">
+        <div class="spinner"></div>
+    </div>
+
+    <div ng-show="!loading && applications.length > 0" class="row">
+        <div class="card" ng-repeat="app in applications">
+            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px;">
+                <h3 class="card-title">{{app.appliedData.name}}</h3>
+                <span class="badge" ng-class="getStatusBadgeClass(app.status)">{{app.status}}</span>
+            </div>
+
+            <p><strong>Email:</strong> {{app.appliedData.email}}</p>
+            <p><strong>Phone:</strong> {{app.appliedData.phone || 'Not provided'}}</p>
+            <p><strong>Qualification:</strong> {{app.appliedData.qualification || 'Not provided'}}</p>
+            <p><strong>Experience:</strong> {{app.appliedData.experience || 'Not provided'}}</p>
+            <p><strong>Location:</strong> {{app.appliedData.location || 'Not provided'}}</p>
+
+            <p><strong>Skills:</strong></p>
+            <div style="margin-bottom: 15px;">
+                <span class="badge badge-secondary" ng-repeat="skill in app.appliedData.skills" style="margin-right: 5px;">{{skill}}</span>
+                <span ng-show="app.appliedData.skills.length === 0">No skills provided</span>
+            </div>
+
+            <div ng-show="app.coverLetter" style="background-color: #f8f9fa; padding: 10px; border-radius: 4px; margin-bottom: 15px;">
+                <strong>Cover Letter:</strong>
+                <p>{{app.coverLetter}}</p>
+            </div>
+
+            <p><strong>Applied Date:</strong> {{app.createdAt | date:'short'}}</p>
+
+            <div style="margin-top: 15px;">
+                <strong>Change Status:</strong>
+                <div class="btn-group" style="margin-top: 10px;">
+                    <button ng-click="updateStatus(app._id, 'Shortlisted')" class="btn btn-primary">Shortlist</button>
+                    <button ng-click="updateStatus(app._id, 'Rejected')" class="btn btn-danger">Reject</button>
+                    <button ng-click="updateStatus(app._id, 'Accepted')" class="btn btn-success">Accept</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div ng-show="!loading && applications.length === 0" class="text-center" style="padding: 40px;">
+        <p>No applicants for this job yet.</p>
+    </div>
+</div>

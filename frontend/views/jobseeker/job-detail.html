@@ -1,0 +1,33 @@
+<!-- Job Detail View -->
+<div>
+    <button ng-click="goBack()" class="btn btn-secondary" style="margin-bottom: 20px;">← Back to Jobs</button>
+
+    <div ng-show="loading" class="text-center">
+        <div class="spinner"></div>
+    </div>
+
+    <div ng-show="!loading" class="card">
+        <h1>{{job.title}}</h1>
+        <p><strong>Company:</strong> {{job.companyName}}</p>
+        <p><strong>Location:</strong> {{job.location}}</p>
+        <p><strong>Salary:</strong> {{job.salary}}</p>
+        <p><strong>Job Type:</strong> <span class="badge badge-primary">{{job.jobType}}</span></p>
+
+        <h3 style="margin-top: 30px; margin-bottom: 10px;">Description</h3>
+        <p>{{job.description}}</p>
+
+        <h3 style="margin-top: 30px; margin-bottom: 10px;">Skills Required</h3>
+        <div>
+            <span class="badge badge-secondary" ng-repeat="skill in job.skillsRequired">{{skill}}</span>
+        </div>
+
+        <div class="btn-group" style="margin-top: 30px;">
+            <button ng-click="applyForJob()" class="btn btn-success">Apply for this Job</button>
+            <button ng-click="goBack()" class="btn btn-secondary">Back to Jobs</button>
+        </div>
+    </div>
+
+    <div ng-show="!loading && message" class="alert" ng-class="{'alert-error': messageType === 'error'}">
+        {{message}}
+    </div>
+</div>

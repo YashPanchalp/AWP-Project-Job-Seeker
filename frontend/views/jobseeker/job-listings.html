@@ -1,0 +1,64 @@
+<!-- Job Listings View -->
+<div>
+    <h1>Job Listings</h1>
+    
+    <div class="card" style="margin-bottom: 30px;">
+        <h3>Search & Filter Jobs</h3>
+        <form ng-submit="applyFilters()">
+            <div class="row">
+                <div>
+                    <label>Job Title/Role</label>
+                    <input type="text" ng-model="filters.role" placeholder="e.g., Software Engineer">
+                </div>
+                <div>
+                    <label>Company</label>
+                    <input type="text" ng-model="filters.company" placeholder="e.g., Google">
+                </div>
+                <div>
+                    <label>Skills</label>
+                    <input type="text" ng-model="filters.skills" placeholder="e.g., JavaScript">
+                </div>
+                <div>
+                    <label>Location</label>
+                    <input type="text" ng-model="filters.location" placeholder="e.g., New York">
+                </div>
+            </div>
+            <div class="btn-group">
+                <button type="submit" class="btn btn-primary">Search</button>
+                <button type="button" ng-click="clearFilters()" class="btn btn-secondary">Clear Filters</button>
+            </div>
+        </form>
+    </div>
+
+    <div ng-show="message" class="alert" ng-class="{'alert-success': messageType === 'success', 'alert-error': messageType === 'error'}">
+        {{message}}
+    </div>
+
+    <div ng-show="loading" class="text-center">
+        <div class="spinner"></div>
+        <p>Loading jobs...</p>
+    </div>
+
+    <div ng-show="!loading && jobs.length > 0" class="row">
+        <div class="card" ng-repeat="job in jobs" style="cursor: pointer;">
+            <h3 class="card-title">{{job.title}}</h3>
+            <p><strong>Company:</strong> {{job.companyName}}</p>
+            <p><strong>Location:</strong> {{job.location}}</p>
+            <p><strong>Salary:</strong> {{job.salary}}</p>
+            <p><strong>Type:</strong> <span class="badge badge-primary">{{job.jobType}}</span></p>
+            <p><strong>Skills Required:</strong></p>
+            <div style="margin-bottom: 10px;">
+                <span class="badge badge-secondary" ng-repeat="skill in job.skillsRequired">{{skill}}</span>
+            </div>
+            <p>{{job.description | limitTo:150}}...</p>
+            <div class="btn-group">
+                <button ng-click="viewJob(job._id)" class="btn btn-primary">View Details</button>
+                <button ng-click="applyForJob(job._id)" class="btn btn-success">Apply Now</button>
+            </div>
+        </div>
+    </div>
+
+    <div ng-show="!loading && jobs.length === 0" class="text-center">
+        <p>No jobs found. Try adjusting your filters.</p>
+    </div>
+</div>

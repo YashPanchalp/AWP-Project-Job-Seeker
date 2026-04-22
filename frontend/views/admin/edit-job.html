@@ -1,0 +1,78 @@
+<!-- Edit Job View -->
+<div>
+    <h1>Edit Job</h1>
+
+    <div ng-show="message" class="alert" ng-class="{'alert-success': messageType === 'success', 'alert-error': messageType === 'error'}">
+        {{message}}
+    </div>
+
+    <div ng-show="loading" class="text-center">
+        <div class="spinner"></div>
+    </div>
+
+    <form ng-show="!loading" ng-submit="submitJob()" class="card">
+        <h3>Job Details</h3>
+
+        <div class="form-group">
+            <label for="editJobTitle">Job Title *</label>
+            <input type="text" id="editJobTitle" name="title" ng-model="formData.title" required>
+        </div>
+
+        <div class="form-group">
+            <label for="editCompanyName">Company Name *</label>
+            <input type="text" id="editCompanyName" name="companyName" ng-model="formData.companyName" required>
+        </div>
+
+        <div class="form-group">
+            <label for="editJobLocation">Location *</label>
+            <input type="text" id="editJobLocation" name="location" ng-model="formData.location" required>
+        </div>
+
+        <div class="form-group">
+            <label for="editJobSalary">Salary</label>
+            <input type="text" id="editJobSalary" name="salary" ng-model="formData.salary">
+        </div>
+
+        <div class="form-group">
+            <label for="editJobType">Job Type</label>
+            <select id="editJobType" name="jobType" ng-model="formData.jobType">
+                <option value="Full-time">Full-time</option>
+                <option value="Part-time">Part-time</option>
+                <option value="Contract">Contract</option>
+                <option value="Internship">Internship</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="editJobDescription">Job Description *</label>
+            <textarea id="editJobDescription" name="description" ng-model="formData.description" rows="6" required></textarea>
+        </div>
+
+        <h3 style="margin-top: 30px; margin-bottom: 15px;">Required Skills *</h3>
+
+        <div style="margin-bottom: 15px;">
+            <span class="badge badge-secondary" ng-repeat="skill in formData.skillsRequired" style="margin-right: 5px; margin-bottom: 5px; display: inline-block;">
+                {{skill}}
+                <button type="button" ng-click="removeSkill($index)" style="background: none; border: none; color: white; cursor: pointer; margin-left: 5px;">×</button>
+            </span>
+        </div>
+
+        <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+            <input type="text" id="editNewSkill" name="newSkill" ng-model="newSkill" placeholder="Add a required skill">
+            <button type="button" ng-click="addSkill()" class="btn btn-secondary">Add Skill</button>
+        </div>
+
+        <div class="form-group">
+            <label>
+                <input type="checkbox" id="isActive" name="isActive" ng-model="formData.isActive"> Job is Active
+            </label>
+        </div>
+
+        <div class="btn-group">
+            <button type="submit" class="btn btn-success" ng-disabled="saving">
+                {{saving ? 'Saving...' : 'Update Job'}}
+            </button>
+            <button type="button" ng-click="goBack()" class="btn btn-secondary">Cancel</button>
+        </div>
+    </form>
+</div>

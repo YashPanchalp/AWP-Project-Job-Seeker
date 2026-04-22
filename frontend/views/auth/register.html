@@ -1,0 +1,57 @@
+<!-- Register View -->
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="auth-header">
+            <h1>Sign up</h1>
+            <p>Make the most of your professional life</p>
+        </div>
+        
+        <div ng-show="message" class="alert" ng-class="{'alert-success': messageType === 'success', 'alert-error': messageType === 'error'}">
+            {{message}}
+        </div>
+
+        <form ng-submit="register()">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" ng-model="formData.name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" ng-model="formData.email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" ng-model="formData.password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" ng-model="formData.confirmPassword" required>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 24px;">
+                <label for="role">I am a</label>
+                <select id="role" name="role" ng-model="formData.role" required>
+                    <option value="">Select Role</option>
+                    <option value="jobseeker">Job Seeker</option>
+                    <option value="admin">Company / Recruiter</option>
+                </select>
+            </div>
+
+            <p style="font-size: 12px; color: var(--li-text-muted); text-align: center; margin-bottom: 16px;">
+                By clicking Agree & Join, you agree to the JobSeeker User Agreement, Privacy Policy, and Cookie Policy.
+            </p>
+
+            <button type="submit" class="btn btn-primary" ng-disabled="loading" style="width: 100%; border-radius: 24px; padding: 14px;">
+                <span ng-show="!loading">Agree & Join</span>
+                <span ng-show="loading">Joining...</span>
+            </button>
+        </form>
+
+        <div class="auth-footer">
+            Already on JobSeeker? <a href="#/login">Sign in</a>
+        </div>
+    </div>
+</div>

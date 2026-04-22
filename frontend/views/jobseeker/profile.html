@@ -1,0 +1,88 @@
+<!-- Profile View -->
+<div>
+    <h1>My Profile</h1>
+
+    <div ng-show="message" class="alert" ng-class="{'alert-success': messageType === 'success', 'alert-error': messageType === 'error'}">
+        {{message}}
+    </div>
+
+    <div ng-show="loading" class="text-center">
+        <div class="spinner"></div>
+    </div>
+
+    <div ng-show="!loading" class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h2>Your Information</h2>
+            <button ng-click="toggleEditMode()" class="btn" ng-class="{'btn-secondary': editMode, 'btn-primary': !editMode}">
+                {{editMode ? 'Cancel' : 'Edit'}}
+            </button>
+        </div>
+
+        <form ng-show="editMode" ng-submit="saveProfile()">
+            <div class="form-group">
+                <label for="profName">Full Name *</label>
+                <input type="text" id="profName" name="name" ng-model="profile.name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="profEmail">Email (Read-only)</label>
+                <input type="email" id="profEmail" name="email" ng-model="profile.email" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="profPhone">Phone</label>
+                <input type="tel" id="profPhone" name="phone" ng-model="profile.phone">
+            </div>
+
+            <div class="form-group">
+                <label for="profLocation">Location</label>
+                <input type="text" id="profLocation" name="location" ng-model="profile.location">
+            </div>
+
+            <div class="form-group">
+                <label for="profQualification">Qualification</label>
+                <input type="text" id="profQualification" name="qualification" ng-model="profile.qualification">
+            </div>
+
+            <div class="form-group">
+                <label for="profExperience">Experience</label>
+                <textarea id="profExperience" name="experience" ng-model="profile.experience" rows="4"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Skills</label>
+                <div style="margin-bottom: 10px;">
+                    <span class="badge badge-secondary" ng-repeat="skill in profile.skills" style="margin-right: 5px; margin-bottom: 5px;">
+                        {{skill}} 
+                        <button type="button" ng-click="removeSkill($index)" style="background: none; border: none; color: white; cursor: pointer; margin-left: 5px;">×</button>
+                    </span>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <input type="text" id="newSkill" name="newSkill" ng-model="newSkill" placeholder="Add a skill">
+                    <button type="button" ng-click="addSkill(newSkill)" class="btn btn-secondary">Add Skill</button>
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <button type="submit" class="btn btn-success" ng-disabled="saving">
+                    {{saving ? 'Saving...' : 'Save Profile'}}
+                </button>
+                <button type="button" ng-click="cancelEdit()" class="btn btn-secondary">Cancel</button>
+            </div>
+        </form>
+
+        <div ng-show="!editMode" style="padding: 20px 0;">
+            <p><strong>Name:</strong> {{profile.name}}</p>
+            <p><strong>Email:</strong> {{profile.email}}</p>
+            <p><strong>Phone:</strong> {{profile.phone || 'Not provided'}}</p>
+            <p><strong>Location:</strong> {{profile.location || 'Not provided'}}</p>
+            <p><strong>Qualification:</strong> {{profile.qualification || 'Not provided'}}</p>
+            <p><strong>Experience:</strong> {{profile.experience || 'Not provided'}}</p>
+            <p><strong>Skills:</strong></p>
+            <div>
+                <span class="badge badge-secondary" ng-repeat="skill in profile.skills" style="margin-right: 5px;">{{skill}}</span>
+                <span ng-show="profile.skills.length === 0">No skills added yet</span>
+            </div>
+        </div>
+    </div>
+</div>
