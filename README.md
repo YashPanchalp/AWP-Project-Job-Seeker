@@ -15,76 +15,6 @@ A complete full-stack web application for connecting job seekers with companies.
 9. [User Roles & Features](#user-roles--features)
 10. [Troubleshooting](#troubleshooting)
 
----
-
-## 📁 Project Structure
-
-```
-job-seeker-app/
-│
-├── backend/
-│   ├── config/
-│   │   └── database.js          # MongoDB connection config
-│   ├── controllers/
-│   │   ├── authController.js    # Authentication logic
-│   │   ├── jobController.js     # Job management
-│   │   ├── applicationController.js  # Applications handling
-│   │   └── profileController.js # User profile management
-│   ├── middleware/
-│   │   ├── auth.js              # JWT authentication
-│   │   └── adminAuth.js         # Admin role verification
-│   ├── models/
-│   │   ├── User.js              # User schema
-│   │   ├── Job.js               # Job schema
-│   │   └── Application.js       # Application schema
-│   ├── routes/
-│   │   ├── auth.js              # Auth endpoints
-│   │   ├── jobs.js              # Job endpoints
-│   │   ├── applications.js      # Application endpoints
-│   │   └── profile.js           # Profile endpoints
-│   ├── .env                     # Environment variables
-│   ├── package.json
-│   └── server.js                # Express app entry point
-│
-├── frontend/
-│   ├── css/
-│   │   └── style.css            # Global styles & Bootstrap
-│   ├── js/
-│   │   ├── app.js               # AngularJS app & routing
-│   │   ├── controllers/
-│   │   │   ├── auth.controller.js
-│   │   │   ├── job.controller.js
-│   │   │   ├── application.controller.js
-│   │   │   ├── profile.controller.js
-│   │   │   ├── admin.controller.js
-│   │   │   └── applicants.controller.js
-│   │   └── services/
-│   │       ├── auth.service.js
-│   │       ├── job.service.js
-│   │       ├── application.service.js
-│   │       └── profile.service.js
-│   ├── views/
-│   │   ├── auth/
-│   │   │   ├── login.html
-│   │   │   └── register.html
-│   │   ├── jobseeker/
-│   │   │   ├── job-listings.html
-│   │   │   ├── job-detail.html
-│   │   │   ├── apply-job.html
-│   │   │   ├── my-applications.html
-│   │   │   └── profile.html
-│   │   └── admin/
-│   │       ├── dashboard.html
-│   │       ├── post-job.html
-│   │       ├── edit-job.html
-│   │       └── applicants.html
-│   └── index.html               # Main HTML file
-│
-└── README.md                    # This file
-```
-
----
-
 ## ✨ Features
 
 ### Authentication & Authorization
@@ -585,5 +515,6 @@ This project is open source and available under the MIT License.
 ---
 
 **Happy Job Hunting!** 🚀
-#   A W P - P r o j e c t - J o b - S e e k e r  
+#   A W P - P r o j e c t - J o b - S e e k e r 
+ 
  
